@@ -1,0 +1,48 @@
+Testing Your Setup
+Run these commands:
+
+bash
+# Build and start all containers
+docker-compose up --build
+
+# In another terminal, run migrations
+docker-compose exec backend python manage.py makemigrations
+docker-compose exec backend python manage.py migrate
+
+# Create a superuser
+docker-compose exec backend python manage.py createsuperuser
+
+# Check if everything is running
+docker-compose ps
+Access Points:
+Backend API: http://localhost:8000
+
+Backend Admin: http://localhost:8000/admin
+
+Frontend: http://localhost:3000
+
+Database: localhost:5432 (PostgreSQL)
+
+Commands to Manage Docker:
+bash
+# Stop containers
+docker-compose down
+
+# Stop and remove volumes (clean slate)
+docker-compose down -v
+
+# View logs
+docker-compose logs -f
+
+# Rebuild after changes
+docker-compose up --build
+Next Steps After This:
+Once you confirm everything works, we'll:
+
+Phase 2: Create custom User model and authentication
+
+Add JWT endpoints
+
+Test authentication flow
+
+Let me know when you've got this running or if you encounter any issues! 🚀

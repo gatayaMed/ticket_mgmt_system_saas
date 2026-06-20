@@ -1,0 +1,27 @@
+Email templates created
+
+SMTP configured
+
+Email service implemented
+
+Resend functionality added
+
+Audit log model created
+
+Audit middleware configured
+
+Audit views added
+
+Settings model created
+
+Settings API implemented
+
+Deletion flow with confirmation
+
+All views updated with logging
+
+URLs updated
+
+Tests written
+
+Documentation updated

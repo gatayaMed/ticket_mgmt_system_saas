@@ -1,0 +1,34 @@
+#!/bin/bash
+# reset_migrations.sh
+
+echo "🗑️  Deleting migration files..."
+rm -rf accounts/migrations/*.py
+rm -rf accounts/migrations/__pycache__/
+# Keep __init__.py
+touch accounts/migrations/__init__.py
+
+echo "🔄 Dropping and recreating database..."
+docker-compose down
+docker-compose exec db psql -U postgres -c "DROP DATABASE IF EXISTS saas_ticket_db;"
+docker-compose exec db psql -U postgres -c "CREATE DATABASE saas_ticket_db;"
+docker-compose up -d
+
+echo "⏳ Waiting for database to be ready..."
+sleep 5
+
+echo "📝 Creating new migrations..."
+docker-compose exec backend python manage.py makemigrations accounts
+
+echo "🚀 Applying migrations..."
+docker-compose exec backend python manage.py migrate
+
+echo "✨ Creating superuser..."
+docker-compose exec backend python manage.py createsuperuser
+
+echo "✅ Reset complete!"
+
+---------------------------
+
+
+chmod +x reset_migrations.sh
+./reset_migrations.sh

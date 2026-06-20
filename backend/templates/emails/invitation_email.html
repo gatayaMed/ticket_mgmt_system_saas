@@ -1,0 +1,81 @@
+<!-- templates/emails/invitation_email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Organization Invitation</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #4F46E5; color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; background: #f9f9f9; }
+        .button { 
+            display: inline-block; 
+            padding: 12px 24px; 
+            background: #4F46E5; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .footer { text-align: center; color: #666; font-size: 12px; margin-top: 20px; }
+        .details { background: white; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .role-badge { 
+            display: inline-block; 
+            padding: 4px 12px; 
+            background: #E5E7EB; 
+            border-radius: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 You've Been Invited!</h1>
+        </div>
+        
+        <div class="content">
+            <p>Hello {{ user_name|default:"there" }},</p>
+            
+            <p><strong>{{ inviter_name }}</strong> has invited you to join <strong>{{ organization_name }}</strong>.</p>
+            
+            <div class="details">
+                <p><strong>Organization:</strong> {{ organization_name }}</p>
+                <p><strong>Role:</strong> <span class="role-badge">{{ role }}</span></p>
+                <p><strong>Invited by:</strong> {{ inviter_name }} ({{ inviter_email }})</p>
+                <p><strong>Expires:</strong> {{ expires_at|date:"F j, Y" }}</p>
+            </div>
+            
+            <p>To accept this invitation, click the button below:</p>
+            
+            <div style="text-align: center;">
+                <a href="{{ accept_url }}" class="button">Accept Invitation</a>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                Or copy and paste this link into your browser:<br>
+                <span style="word-break: break-all; font-size: 12px;">{{ accept_url }}</span>
+            </p>
+            
+            <p style="margin-top: 20px;">
+                If you don't have an account yet, you'll be guided to create one.
+            </p>
+            
+            <p style="margin-top: 20px; color: #999; font-size: 14px;">
+                This invitation will expire on {{ expires_at|date:"F j, Y" }}.
+            </p>
+            
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+            
+            <p style="font-size: 14px; color: #666;">
+                If you didn't expect this invitation, you can safely ignore this email.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; {{ current_year }} SaaS Platform. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
