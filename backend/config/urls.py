@@ -26,6 +26,8 @@ urlpatterns = [
     path('api/search/', include('search.urls')),
     # Activity
     path('api/activity/', include('activity.urls')),
+    # AI Integration
+    path('api/ai/', include('ai.urls')),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 # Serve media files in development

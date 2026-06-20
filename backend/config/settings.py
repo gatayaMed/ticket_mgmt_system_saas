@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'webhooks',
     'search',
     'activity',
+
+    # AI Integration
+    'ai',
 ]
 
 MIDDLEWARE = [
